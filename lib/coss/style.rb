@@ -1,4 +1,5 @@
 require 'coss/style/version'
+require 'coss/style/structure'
 
 module Coss
   module Style

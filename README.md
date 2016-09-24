@@ -1,4 +1,4 @@
-# Coss::Style
+# COSS-Style
 
 Coss-style will inspect your assets folder to make sure that your CSS matches the Components Oriented Style Sheets design
 
