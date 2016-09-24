@@ -1,4 +1,3 @@
-
 module Coss
   module Style
     class Configuration
