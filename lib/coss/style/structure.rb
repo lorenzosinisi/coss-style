@@ -14,7 +14,7 @@ module Coss
         components: :folder,
         mixins: :folder,
         variables: :folder,
-        style: :file,
+        style: :sass,
       }
     }
 
