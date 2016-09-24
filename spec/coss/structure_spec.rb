@@ -14,8 +14,8 @@ describe Coss::Structure do
     expect(Coss::Structure::FOLDER).not_to be(nil)
   end
 
-  it "the folder structure is an hash" do
-    expect(Coss::Structure::FOLDER).to be_a(Hash)
+  it "the folder structure is an Array" do
+    expect(Coss::Structure::FOLDER).to be_a(Array)
   end
 
   describe 'initialize' do
@@ -48,7 +48,15 @@ describe Coss::Structure do
   end
 
   describe '#create' do
+    before do
+      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+    end
+    let(:structure) { Coss::Structure.new('spec/fixtures') }
+
     it "should create the folder structure" do
+      expect(structure.create.to_s).to include('components')
+      expect(structure.create.to_s).to include('mixins')
+      expect(structure.create.to_s).to include('variables')
     end
   end
 end

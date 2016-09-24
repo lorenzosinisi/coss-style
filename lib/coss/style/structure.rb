@@ -11,12 +11,7 @@ module Coss
 
     attr_accessor :base_path, :full_path, :absolute_path
 
-    FOLDER = {
-      folder: :components,
-      folder: :mixins,
-      folder: :variables,
-      sass: :style,
-    }
+    FOLDER = [ :components, :mixins, :variables ]
 
     def initialize(base_path)
       @base_path = base_path || raise('base_path must be set')
@@ -24,14 +19,14 @@ module Coss
       @absolute_path = File.expand_path(@full_path)
     end
 
-    def css_path
-      Style.configuration.css_path.gsub('./', '/') ||
-        raise('please add css_path to the configuration')
-    end
-
     def create
-      FOLDER.each do |element|
+      created = []
+      FOLDER.each do |name|
+        dir = absolute_path + '/' + name.to_s
+        create_dir(dir)
+        created << dir
       end
+      created
     end
 
     def directory_exist?(dir)
@@ -41,6 +36,17 @@ module Coss
     def create_dir(name)
       system('mkdir', '-p', name)
     end
+
+    def create_file(name)
+      File.new(name,'w')
+    end
+    
+    private
+     
+      def css_path
+        Style.configuration.css_path.gsub('./', '/') ||
+          raise('please add css_path to the configuration')
+      end
 
   end
 end
