@@ -11,7 +11,9 @@ module Coss
 
     attr_accessor :base_path, :full_path, :absolute_path
 
-    FOLDER = [ :components, :mixins, :variables ]
+    FOLDER = [:components, :mixins, :variables]
+
+    FILE = [:"style.sass"]
 
     def initialize(base_path)
       @base_path = base_path || raise('base_path must be set')
@@ -20,13 +22,14 @@ module Coss
     end
 
     def create
-      created = []
       FOLDER.each do |name|
         dir = absolute_path + '/' + name.to_s
         create_dir(dir)
-        created << dir
       end
-      created
+      FILE.each do |name|
+        dir = absolute_path + '/' + name.to_s
+        create_file(dir)
+      end
     end
 
     def directory_exist?(dir)
