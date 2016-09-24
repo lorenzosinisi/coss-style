@@ -9,7 +9,7 @@ module Coss
     #   /variables
     #   style.sass
 
-    attr_accessor :base_path, :fullpath
+    attr_accessor :base_path, :full_path, :absolute_path
 
     FOLDER = {
       folder: :components,
@@ -19,12 +19,14 @@ module Coss
     }
 
     def initialize(base_path)
-      @base_path = base_path || raise("base_path must be set")
-      @fullpath = base_path << css_path
+      @base_path = base_path || raise('base_path must be set')
+      @full_path = base_path + css_path
+      @absolute_path = File.expand_path(@full_path)
     end
 
     def css_path
-      configuration.css_path || raise("please add css_path to the configuration")
+      Style.configuration.css_path.gsub('./', '/') ||
+        raise('please add css_path to the configuration')
     end
 
     def create
@@ -34,6 +36,10 @@ module Coss
 
     def directory_exist?(dir)
       test(?d, dir)
+    end
+
+    def create_dir(name)
+      system('mkdir', '-p', name)
     end
 
   end

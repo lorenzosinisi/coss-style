@@ -19,12 +19,31 @@ describe Coss::Structure do
   end
 
   describe 'initialize' do
+    before do
+      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+    end
     context 'with configs' do
-      it 'has a base path set'
-      it 'has a full_path set'
+      let(:structure) { Coss::Structure.new('spec/fixtures') }
+      it 'has a base path set' do
+        expect(structure.base_path).to eq('spec/fixtures')
+      end
+      it 'has a full_path set' do
+        expect(structure.full_path).to eq('spec/fixtures/coss_folder')
+      end
+      it 'has an absolute_path set' do
+        expect(structure.absolute_path).to include('coss-style/spec/fixtures/coss_folder')
+      end
     end
     context 'withoud configs' do
-      it 'should raise an error'
+      before do
+        Coss::Style.configure { |config| config.css_path = nil } 
+      end
+      let(:subject) { Coss::Structure.new(nil) }
+      it 'should raise an error' do
+        expect {
+          subject
+        }.to raise_error(RuntimeError, 'base_path must be set')
+      end
     end
   end
 
