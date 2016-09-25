@@ -9,7 +9,7 @@ module Coss
       end
 
       def create
-        File.new(name,'w')
+        File.new(name,'w') unless exists?
       end
 
       def exists?
