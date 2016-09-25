@@ -6,10 +6,6 @@ module Coss
                     :extras,
                     :absolute_path
 
-    def self.absolute_path
-      File.expand_path(css_path)
-    end
-
     end
   end
 end
