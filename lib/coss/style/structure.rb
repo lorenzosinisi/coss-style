@@ -27,12 +27,18 @@ module Coss
       true
     end
 
+    def explain
+      "The structure of files in COSS should be #{FOLDER.push(FILE).join(', ')}"
+    end
+
     def files_missing
       missing = {}
       missing[:folders] = test_folders
       missing[:files]   = test_files
       missing
     end
+
+    private
 
     def create_folders
       FOLDER.each do |name|

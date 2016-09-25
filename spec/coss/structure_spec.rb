@@ -57,7 +57,7 @@ describe Coss::Structure do
     end
   end
 
-  describe '#test_files' do
+  describe '#files_missing' do
     let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
       Coss::Style.configure { |config| config.css_path = './coss_folder' }
@@ -66,7 +66,6 @@ describe Coss::Structure do
     context 'without files' do
       it "should create the folder structure" do
         system('rm', '-r', structure.absolute_path)
-        structure.test_files
         expect(structure.files_missing).
         to eq({
           :files => [:"style.sass"], 
@@ -87,4 +86,11 @@ describe Coss::Structure do
     end
 
   end
+
+  describe '#explain' do
+    let(:structure) { Coss::Structure.new('spec/fixtures') }
+    it 'should print the structure of a COSS project' do
+      expect(structure.explain).to eq('The structure of files in COSS should be components, mixins, variables, style.sass')
+    end
+  end 
 end
