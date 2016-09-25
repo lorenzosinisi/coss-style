@@ -12,12 +12,16 @@ module Coss
         File.new(name,'w')
       end
 
+      def exists?
+        File.exist?(name)
+      end
+
       private
 
       def name
         path + file.join('.')
       end
-      
+
     end
   end
 end
