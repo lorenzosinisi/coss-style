@@ -78,10 +78,7 @@ describe Coss::Structure do
       it "should return an empty hash" do
         structure.create
         expect(structure.files_missing).
-        to eq({
-          :files => [], 
-          :folders => []
-          })
+        to eq(nil)
       end
     end
   end

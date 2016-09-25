@@ -33,9 +33,9 @@ module Coss
 
     def files_missing
       missing = {}
-      missing[:folders] = test_folders
-      missing[:files]   = test_files
-      missing
+      missing[:folders] = test_folders unless test_folders.empty?
+      missing[:files]   = test_files   unless test_files.empty?
+      missing.any? && missing || nil
     end
 
     private
