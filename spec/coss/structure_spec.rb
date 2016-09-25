@@ -53,7 +53,7 @@ describe Coss::Structure do
       Coss::Style.configure { |config| config.css_path = './coss_folder' }
     end
     it "should create the folder structure" do
-      expect(structure.create.to_s).to_not be_nil
+      expect(structure.create).to be(true)
     end
   end
 

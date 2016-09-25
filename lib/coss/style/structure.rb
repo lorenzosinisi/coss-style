@@ -22,8 +22,9 @@ module Coss
     end
 
     def create
-      create_folders
-      create_files
+      # the order is important
+      create_folders && create_files
+      true
     end
 
     def files_missing
