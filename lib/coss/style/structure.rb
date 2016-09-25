@@ -27,10 +27,11 @@ module Coss
     end
 
     def test_files
+      byebug
       missing = []
-      missing + test_folders
-      missing + test_files
-      puts "#{missing} are missing"
+      missing << test_folders
+      missing << test_files
+      missing
     end
 
     def create_folders
@@ -63,7 +64,7 @@ module Coss
 
     def test_files
       missing = []
-      FOLDER.each do |name|
+      FILE.each do |name|
         file = absolute_path + '/' + name.to_s
         unless File.exist?(file)
           missing << file

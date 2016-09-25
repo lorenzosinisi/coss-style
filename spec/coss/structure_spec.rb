@@ -63,9 +63,15 @@ describe Coss::Structure do
       system('rm', '-r', structure.absolute_path)
       Coss::Style.configure { |config| config.css_path = './coss_folder' } 
     end
-    
-    it "should create the folder structure" do
-      expect(structure.test_files).to be_nil
+
+    context 'without files' do
+      it "should create the folder structure" do
+        expect(structure.test_files).to eq([:components, :mixins, :variables, :"style.sass"])
+      end
     end
+
+    context 'with files' do
+    end
+
   end
 end
