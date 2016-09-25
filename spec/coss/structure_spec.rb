@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Coss::Structure do
-  
+
   before do
    Coss::Style.configure { |config| config.css_path = './fixtures/coss_folder' }
   end
@@ -20,7 +20,7 @@ describe Coss::Structure do
 
   describe 'initialize' do
     before do
-      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+      Coss::Style.configure { |config| config.css_path = './coss_folder' }
     end
     context 'with configs' do
       let(:structure) { Coss::Structure.new('spec/fixtures') }
@@ -36,7 +36,7 @@ describe Coss::Structure do
     end
     context 'withoud configs' do
       before do
-        Coss::Style.configure { |config| config.css_path = nil } 
+        Coss::Style.configure { |config| config.css_path = nil }
       end
       let(:subject) { Coss::Structure.new(nil) }
       it 'should raise an error' do
@@ -50,7 +50,7 @@ describe Coss::Structure do
   describe '#create' do
     let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
-      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+      Coss::Style.configure { |config| config.css_path = './coss_folder' }
     end
     it "should create the folder structure" do
       expect(structure.create.to_s).to_not be_nil
@@ -61,12 +61,18 @@ describe Coss::Structure do
     let(:structure) { Coss::Structure.new('spec') }
     before do
       system('rm', '-r', structure.absolute_path)
-      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+      Coss::Style.configure { |config| config.css_path = './coss_folder' }
     end
 
     context 'without files' do
       it "should create the folder structure" do
-        expect(structure.test_files).to eq([:components, :mixins, :variables, :"style.sass"])
+        s = Coss::Structure.new('spec/fixtures')
+        s.test_files
+        expect(s.files_missing).
+        to eq({
+          :files => [:"style.sass"], 
+          :folders => [:components, :mixins, :variables]
+          })
       end
     end
 

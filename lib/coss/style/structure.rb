@@ -1,6 +1,6 @@
 module Coss
   class Structure
-    
+
     # The folder structure of a project built or maintained using the COSS Styleguide
     # looks like that:
     # /stylesheets
@@ -26,11 +26,10 @@ module Coss
       create_files
     end
 
-    def test_files
-      byebug
-      missing = []
-      missing << test_folders
-      missing << test_files
+    def files_missing
+      missing = {}
+      missing[:folders] = test_folders
+      missing[:files]   = test_files
       missing
     end
 
@@ -83,9 +82,9 @@ module Coss
     def create_file(name)
       File.new(name,'w')
     end
-    
+
     private
-     
+
       def css_path
         Style.configuration.css_path.gsub('./', '/') ||
           raise('please add css_path to the configuration')
