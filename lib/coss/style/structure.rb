@@ -28,9 +28,7 @@ module Coss
     end
 
     def create
-      # the order is important
-      create_folders && create_files
-      true
+      create_folders_and_files
     end
 
     def explain
@@ -45,6 +43,11 @@ module Coss
     end
 
     private
+
+    def create_folders_and_files
+      create_folders && create_files
+      true
+    end
 
     def create_folders
       FOLDER.each do |name|
