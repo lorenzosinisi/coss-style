@@ -9,11 +9,16 @@ describe Coss::Style::Component do
 
   describe '#create' do
     subject { described_class.new('sidebar-login', :sass) }
-    it 'creates an empty file' do
+    it 'creates a file' do
       subject.create
       file = subject.path + 'sidebar-login.sass'
       exists = File.exist?(file)
       expect(exists).to be_truthy
+    end
+    it 'the file starts with the name of the component' do
+      subject.create
+      file = subject.path + 'sidebar-login.sass'
+      expect(File.read(file)).to eq('.sidebar-login')
     end
   end
 
