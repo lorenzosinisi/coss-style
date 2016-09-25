@@ -84,7 +84,6 @@ describe Coss::Structure do
           })
       end
     end
-
   end
 
   describe '#explain' do
