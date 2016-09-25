@@ -21,7 +21,7 @@ module Coss
       :"style.sass"
     ] # I do not freeze that constant so that can be adapted based on the project
 
-    def initialize(args)
+    def initialize(args = nil)
       @absolute_path = File.expand_path(css_path)
     end
 

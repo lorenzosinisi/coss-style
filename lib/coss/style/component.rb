@@ -1,16 +1,23 @@
 module Coss
   module Style
     class Component
-      attr_accessor :name, :extension, :path
+      attr_accessor :file, :path
 
       def initialize(name, extension = :sass)
-        @name, @extension = name, extension
-        @path = Style.configuration.css_path + '/components'
+        @file = name, extension
+        @path = Style.configuration.css_path + '/components/'
       end
 
       def create
         File.new(name,'w')
       end
+
+      private
+
+      def name
+        path + file.join('.')
+      end
+      
     end
   end
 end
