@@ -3,11 +3,11 @@ require "spec_helper"
 describe Coss::Structure do
 
   before do
-   Coss::Style.configure { |config| config.css_path = './fixtures/coss_folder' }
+   Coss::Style.configure { |config| config.css_path = 'spec/fixtures/coss_folder' }
   end
 
   it "has the configuration set" do
-    expect(Coss::Style.configuration.css_path).to eq('./fixtures/coss_folder')
+    expect(Coss::Style.configuration.css_path).to eq('spec/fixtures/coss_folder')
   end
 
   it "has a folder structure as constant" do
@@ -20,29 +20,12 @@ describe Coss::Structure do
 
   describe 'initialize' do
     before do
-      Coss::Style.configure { |config| config.css_path = './coss_folder' }
+      Coss::Style.configure { |config| config.css_path = 'spec/fixtures/coss_folder' }
     end
     context 'with configs' do
       let(:structure) { Coss::Structure.new('spec/fixtures') }
-      it 'has a base path set' do
-        expect(structure.base_path).to eq('spec/fixtures')
-      end
-      it 'has a full_path set' do
-        expect(structure.full_path).to eq('spec/fixtures/coss_folder')
-      end
       it 'has an absolute_path set' do
         expect(structure.absolute_path).to include('coss-style/spec/fixtures/coss_folder')
-      end
-    end
-    context 'withoud configs' do
-      before do
-        Coss::Style.configure { |config| config.css_path = nil }
-      end
-      let(:subject) { Coss::Structure.new(nil) }
-      it 'should raise an error' do
-        expect {
-          subject
-        }.to raise_error(RuntimeError, 'base_path must be set')
       end
     end
   end
@@ -50,7 +33,7 @@ describe Coss::Structure do
   describe '#create' do
     let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
-      Coss::Style.configure { |config| config.css_path = './coss_folder' }
+      Coss::Style.configure { |config| config.css_path = 'spec/fixtures/coss_folder' }
     end
     it "should create the folder structure" do
       expect(structure.create).to be(true)
@@ -60,7 +43,7 @@ describe Coss::Structure do
   describe '#files_missing' do
     let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
-      Coss::Style.configure { |config| config.css_path = './coss_folder' }
+      Coss::Style.configure { |config| config.css_path = './spec/fixtures/coss_folder' }
     end
 
     context 'without files' do
