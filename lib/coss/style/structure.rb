@@ -11,9 +11,15 @@ module Coss
 
     attr_accessor :base_path, :full_path, :absolute_path
 
-    FOLDER = [:components, :mixins, :variables]
+    FOLDER = [
+      :components, 
+      :mixins, 
+      :variables
+    ] # I do not freeze that constant so that can be adapted based on the project
 
-    FILE = [:"style.sass"]
+    FILE = [
+      :"style.sass"
+    ] # I do not freeze that constant so that can be adapted based on the project
 
     def initialize(base_path)
       @base_path = base_path || raise('base_path must be set')
