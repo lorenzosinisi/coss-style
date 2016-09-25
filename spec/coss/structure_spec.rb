@@ -48,13 +48,24 @@ describe Coss::Structure do
   end
 
   describe '#create' do
+    let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
       Coss::Style.configure { |config| config.css_path = './coss_folder' } 
     end
-    let(:structure) { Coss::Structure.new('spec/fixtures') }
-
     it "should create the folder structure" do
       expect(structure.create.to_s).to_not be_nil
+    end
+  end
+
+  describe '#test_files' do
+    let(:structure) { Coss::Structure.new('spec') }
+    before do
+      system('rm', '-r', structure.absolute_path)
+      Coss::Style.configure { |config| config.css_path = './coss_folder' } 
+    end
+    
+    it "should create the folder structure" do
+      expect(structure.test_files).to be_nil
     end
   end
 end

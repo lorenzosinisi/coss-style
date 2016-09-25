@@ -26,6 +26,13 @@ module Coss
       create_files
     end
 
+    def test_files
+      missing = []
+      missing + test_folders
+      missing + test_files
+      puts "#{missing} are missing"
+    end
+
     def create_folders
       FOLDER.each do |name|
         dir = absolute_path + '/' + name.to_s
@@ -40,6 +47,26 @@ module Coss
         file = absolute_path + '/' + name.to_s
         unless File.exist?(file)
           create_file(file)
+        end
+      end
+    end
+
+    def test_folders
+      missing = []
+      FOLDER.each do |name|
+        dir = absolute_path + '/' + name.to_s
+        unless directory_exist?(dir)
+          missing << dir
+        end
+      end
+    end
+
+    def test_files
+      missing = []
+      FOLDER.each do |name|
+        file = absolute_path + '/' + name.to_s
+        unless File.exist?(file)
+          missing << file
         end
       end
     end
