@@ -57,9 +57,10 @@ module Coss
       FOLDER.each do |name|
         dir = absolute_path + '/' + name.to_s
         unless directory_exist?(dir)
-          missing << dir
+          missing << name
         end
       end
+      missing
     end
 
     def test_files
@@ -67,9 +68,10 @@ module Coss
       FILE.each do |name|
         file = absolute_path + '/' + name.to_s
         unless File.exist?(file)
-          missing << file
+          missing << name
         end
       end
+      missing
     end
 
     def directory_exist?(dir)

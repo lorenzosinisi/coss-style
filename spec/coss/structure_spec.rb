@@ -58,14 +58,14 @@ describe Coss::Structure do
   end
 
   describe '#test_files' do
-    let(:structure) { Coss::Structure.new('spec') }
+    let(:structure) { Coss::Structure.new('spec/fixtures') }
     before do
       Coss::Style.configure { |config| config.css_path = './coss_folder' }
     end
 
     context 'without files' do
-      before { system('rm', '-r', structure.absolute_path) }
       it "should create the folder structure" do
+        system('rm', '-r', structure.absolute_path)
         structure.test_files
         expect(structure.files_missing).
         to eq({
@@ -76,8 +76,14 @@ describe Coss::Structure do
     end
 
     context 'with files' do
-      let(:structure) { Coss::Structure.new('spec') }
-      before { structure.create }
+      it "should return an empty hash" do
+        structure.create
+        expect(structure.files_missing).
+        to eq({
+          :files => [], 
+          :folders => []
+          })
+      end
     end
 
   end
