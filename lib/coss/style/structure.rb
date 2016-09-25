@@ -22,13 +22,25 @@ module Coss
     end
 
     def create
+      create_folders
+      create_files
+    end
+
+    def create_folders
       FOLDER.each do |name|
         dir = absolute_path + '/' + name.to_s
-        create_dir(dir)
+        unless directory_exist?(dir)
+          create_dir(dir)
+        end
       end
+    end
+
+    def create_files
       FILE.each do |name|
-        dir = absolute_path + '/' + name.to_s
-        create_file(dir)
+        file = absolute_path + '/' + name.to_s
+        unless File.exist?(file)
+          create_file(file)
+        end
       end
     end
 
